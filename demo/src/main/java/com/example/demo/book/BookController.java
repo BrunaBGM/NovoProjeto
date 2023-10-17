@@ -1,4 +1,4 @@
-package com.example.demo.task;
+package com.example.demo.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,40 +13,40 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/task")
-public class TaskController {
+@RequestMapping("/book")
+public class BookController {
 
     @Autowired
-    TaskService service;
+    BookService service;
 
     @GetMapping
     public String index(Model model){
-        model.addAttribute("tasks", service.findAll());
-        return "task/index";
+        model.addAttribute("books", service.findAll());
+        return "book/index";
     }
     
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirect){
         if (service.delete(id)){
-            redirect.addFlashAttribute("success", "Tarefa apagada com sucesso");
+            redirect.addFlashAttribute("success", "Livro apagado com sucesso");
         }else{
-            redirect.addFlashAttribute("error", "Tarefa não encontrada");
+            redirect.addFlashAttribute("error", "Livro não encontrado");
         }
-        return "redirect:/task";
+        return "redirect:/book";
     }
 
     @GetMapping("new")
-    public String form(Task task){
-        return "task/form";
+    public String form(Book book){
+        return "book/form";
     }
 
     @PostMapping
-    public String create(@Valid Task task, BindingResult result, RedirectAttributes redirect){
-        if (result.hasErrors()) return "task/form";
+    public String create(@Valid Book book, BindingResult result, RedirectAttributes redirect){
+        if (result.hasErrors()) return "book/form";
         
-        service.save(task);
-        redirect.addFlashAttribute("success", "Tarefa cadastrada com sucesso");
-        return "redirect:/task";
+        service.save(book);
+        redirect.addFlashAttribute("success", "Livro cadastrado com sucesso");
+        return "redirect:/book";
     }
     
 }

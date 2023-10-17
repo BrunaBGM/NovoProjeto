@@ -1,4 +1,4 @@
-package com.example.demo.task;
+package com.example.demo.book;
 
 import java.util.List;
 
@@ -8,24 +8,24 @@ import org.springframework.stereotype.Service;
 import jakarta.validation.Valid;
 
 @Service
-public class TaskService {
+public class BookService {
 
     @Autowired
-    TaskRepository repository;
+    BookRepository repository;
 
-    public List<Task> findAll(){
+    public List<Book> findAll(){
         return repository.findAll();
     }
 
     public boolean delete(Long id) {
-        var task = repository.findById(id);
-        if(task.isEmpty()) return false;
+        var book = repository.findById(id);
+        if(book.isEmpty()) return false;
         repository.deleteById(id);
         return true;
     }
 
-    public void save(@Valid Task task) {
-        repository.save(task);
+    public void save(@Valid Book book) {
+        repository.save(book);
     }
     
 }

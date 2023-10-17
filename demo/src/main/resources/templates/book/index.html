@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>EpicTask</title>
+    <title>My books</title>
 </head>
 
 <body class="grey lighten-3">
 
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Epic Task</a>
+            <a href="#" class="brand-logo">Meus livros</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="/task">pendendes</a></li>
-                <li><a href="#">concluídas</a></li>
+                <li class="active"><a href="/book">lidos</a></li>
+                <li><a href="#">nao lidos</a></li>
                 <li><a href="#">usuários</a></li>
             </ul>
         </div>
@@ -27,21 +27,19 @@
         <div class="card-panel teal accent-3" th:if="${success}" th:text="${success}"></div>
         <div class="card-panel red darken-4 white-text" th:if="${error}" th:text="${error}"></div>
 
-        <h2>Tarefas Pendentes</h2>
+        <h2>Livros</h2>
 
         <div class="row">
-            <div class="col s12 m6" th:each="task : ${tasks}">
+            <div class="col s12 m6" th:each="book : ${books}">
                 <div class="card">
                     <div class="card-content">
-                        <div class="progress">
-                            <div class="determinate" th:style="${'width:' + task.status + '%'}"></div>
-                        </div>
-                        <span class="card-title" th:text="${task.title}"></span>
-                        <p th:text="${task.description}"></p>
-                        <span data-badge-caption="pontos" class="badge blue white-text" th:text="${task.score}"></span>
+                        <span class="card-title" th:text="${book.title}"></span>
+                        <span class="card-title" th:text="${book.autor}"></span>
+                        <span class="card-title" th:text="${book.editora}"></span>
+                        <p th:text="${book.description}"></p>
                     </div>
                     <div class="card-action">
-                        <a th:href="${'/task/delete/' + task.id}" class="btn red">
+                        <a th:href="${'/book/delete/' + book.id}" class="btn red">
                             <i class="material-icons">delete</i>
                         </a>
 
@@ -52,7 +50,7 @@
     </div>
 
     <div class="fixed-action-btn">
-        <a href="/task/new" class="btn-floating btn-large blue" title="adicionar tarefa">
+        <a href="/book/new" class="btn-floating btn-large blue" title="adicionar livro">
             <i class="large material-icons">add</i>
         </a>
     </div>
