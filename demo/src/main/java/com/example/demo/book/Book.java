@@ -15,7 +15,7 @@ public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NotBlank(message = "o campo título é obrigatório")
+    @NotBlank(message = "{book.title.blank}")
     String title;
 
     @NotBlank(message = "o campo autor é obrigatório")
@@ -24,7 +24,7 @@ public class Book {
     @NotBlank(message = "o campo editora é obrigatório")
     String editora;
 
-    @Size(min = 10, message = "a descrição deve ter pelo menos 10 caracteres")
+    @Size(min = 10, message = "{book.description.size}")
     String description;
 
 }

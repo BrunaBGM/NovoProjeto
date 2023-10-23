@@ -1,6 +1,10 @@
 package com.example.demo.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,8 +23,13 @@ public class BookController {
     @Autowired
     BookService service;
 
-    @GetMapping
-    public String index(Model model){
+    @Autowired
+    MessageSource messageSource;
+
+  @GetMapping
+    public String index(Model model, @AuthenticationPrincipal OAuth2User user){
+        model.addAttribute("username", user.getAttribute("name"));
+        model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
         model.addAttribute("books", service.findAll());
         return "book/index";
     }
@@ -28,7 +37,7 @@ public class BookController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirect){
         if (service.delete(id)){
-            redirect.addFlashAttribute("success", "Livro apagado com sucesso");
+            redirect.addFlashAttribute("success", messageSource.getMessage("book.delete.success", null, LocaleContextHolder.getLocale()));
         }else{
             redirect.addFlashAttribute("error", "Livro não encontrado");
         }
