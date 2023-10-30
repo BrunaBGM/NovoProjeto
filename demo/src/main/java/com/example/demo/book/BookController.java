@@ -58,4 +58,28 @@ public class BookController {
         return "redirect:/book";
     }
     
+    @GetMapping("/dec/{id}")
+    public String decrement(@PathVariable Long id){
+        service.decrement(id);
+        return "redirect:/book";
+    }
+
+    @GetMapping("/inc/{id}")
+    public String increment(@PathVariable Long id){
+        service.increment(id);
+        return "redirect:/book";
+    }
+
+    @GetMapping("/catch/{id}")
+    public String cacthBook(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+        service.cacthBook(id, user);
+        return "redirect:/book";
+    }
+
+    @GetMapping("/drop/{id}")
+    public String dropBook(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+        service.dropBook(id, user);
+        return "redirect:/book";
+    }
+
 }

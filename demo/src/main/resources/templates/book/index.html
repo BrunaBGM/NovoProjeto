@@ -61,6 +61,12 @@
                         <a th:href="${'/book/delete/' + book.id}" class="btn red">
                             <i class="material-icons">delete</i>
                         </a>
+                        <a th:if="${book.user == null}" th:href="${'/book/catch/' + book.id}" class="btn purple" title="pegar livro">
+                            <i class="material-icons">pan_tool</i>
+                        </a>
+                        <a th:if="${book.user != null}" th:href="${'/book/drop/' + book.id}" class="btn amber" title="largar livro">
+                            <i class="material-icons">do_not_touch</i>
+                        </a>
 
                     </div>
                 </div>
